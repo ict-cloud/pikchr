@@ -195,12 +195,7 @@ pub struct Pikchr {
 
 impl Drop for Pikchr {
     fn drop(&mut self) {
-        if self.rendered.is_null() {
-            unsafe {
-                free(self.rendered as *mut c_void);
-            }
-            self.rendered = std::ptr::null();
-        }
+        unsafe { free(self.rendered as *mut c_void) }
     }
 }
 
