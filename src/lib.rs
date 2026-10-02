@@ -250,8 +250,8 @@ impl Pikchr {
             raw::pikchr(
                 source.as_ptr() as *const c_char,
                 class
-                    .map(|s| s.as_ptr() as *const c_char)
-                    .unwrap_or(std::ptr::null()),
+                    .as_ref()
+                    .map_or(std::ptr::null(), |s| s.as_ptr() as *const c_char),
                 flags.into(),
                 &mut width as *mut c_int,
                 &mut height as *mut c_int,
